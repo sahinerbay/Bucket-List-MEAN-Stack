@@ -7,10 +7,7 @@ const Bucketlist = require('./../model/list');
 router.get('/', (req, res, next) => {
 	Bucketlist.find({})
 		.then((list) => {
-			res.send({
-				success: true,
-				list
-			})
+			res.send(list)
 		})
 		.catch(next)
 });
@@ -22,7 +19,7 @@ router.post('/', (req, res, next) => {
 
 	Bucketlist.create(list_props)
 		.then(list => {
-			res.json({ success: true, message: "Added successfully." })
+			res.send(list)
 		})
 		.catch(next)
 
@@ -33,7 +30,7 @@ router.delete('/:id', (req, res, next) => {
 	let list_id = req.params.id;
 	
 	Bucketlist.findByIdAndRemove(list_id)
-		.then(() => res.json({ success: true, message: "Deleted successfully" }))
+		.then(() => res.status(204).json({ success: true, message: "Deleted successfully" }))
 		.catch(next);
 })
 
