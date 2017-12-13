@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 module.exports = {
-	database: 'mongodb://bucketlist_admin:30Serbay30@ds135916.mlab.com:35916/bucketlist'
+	database: `mongodb://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_COLLECTION}`
 }

@@ -24,7 +24,7 @@ app.use(bodyParser.json());
 */
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/bucketlist', bucketlist_controller);
+app.use('https://radiant-sands-62105.herokuapp.com/bucketlist', bucketlist_controller);
 
 app.use((err, req, res, next) => {
 	res.status(422).send({error: err.message})
