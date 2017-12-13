@@ -9,6 +9,7 @@ const mongoose = require('mongoose');
 const config = require('./config/database');
 const bucketlist_controller = require('./controller/bucketlist');
 
+mongoose.Promise = global.Promise;
 mongoose.connect(config.database, { useMongoClient: true });
 
 //Middleware for CORS
@@ -24,5 +25,9 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/bucketlist', bucketlist_controller);
+
+app.use((err, req, res, next) => {
+	res.status(422).send({error: err.message})
+})
 
 module.exports = app;
